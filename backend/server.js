@@ -7,6 +7,8 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5555;
 
+app.use(express.json());
+
 app.use("/video", videoRouter);
 app.use("/image", imageRouter);
 

@@ -1,7 +1,8 @@
 from manim import *
 
-class HelloManim(Scene):
+class HelloMessage(Scene):
     def construct(self):
-        text = Text("Hello, Manim!", font_size=72)
+        text = Text("Hello", font_size=96)
         self.play(Write(text))
-        self.wait(1)
+        self.wait(2)
+

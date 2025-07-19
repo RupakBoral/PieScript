@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 const TopicForm = ({ onSubmit }) => {
-  const [topic, setTopic] = useState("");
+  const [prompt, setPrompt] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!topic.trim()) return;
-    onSubmit(topic);
-    setTopic("");
+    if (!prompt.trim()) return;
+    onSubmit(prompt);
+    setPrompt("");
   };
 
   return (
@@ -15,11 +15,14 @@ const TopicForm = ({ onSubmit }) => {
       <input
         type="text"
         placeholder="Enter a topic like 'Pythagorean Theorem'"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        className="text-white border rounded px-3 py-2 w-full border-4"
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        className="text-white rounded px-3 py-2 w-full border-4"
       />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
         Generate
       </button>
     </form>

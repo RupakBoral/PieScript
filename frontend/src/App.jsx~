@@ -52,7 +52,7 @@ function App() {
           Your browser does not support the video tag.
         </video>
         <div className="relative z-10">
-          <h1 className="text-white text-4xl font-semibold text-center my-8">
+          <h1 className="text-white text-4xl font-semibold text-center my-10">
             🎥 PieScript
           </h1>
           <TopicForm onSubmit={handleTopicSubmit} loading={loading} />

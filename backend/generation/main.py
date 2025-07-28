@@ -1,42 +1,44 @@
 from manim import *
 
+# Define custom theme colors
+PRIMARY = "#3498db"
+SECONDARY = "#f1c40f"
+TEXT = "#2ecc71"
+BACKGROUND = "#2c3e50"
+
 class Main(Scene):
     def construct(self):
-        self.camera.background_color = WHITE
+        # Set background color
+        self.camera.background_color = BACKGROUND
 
-        # Create the right triangle
-        triangle = Polygon(ORIGIN, 3 * RIGHT, 4 * UP, color=BLUE, stroke_width=4)
+        # Create title
+        title = Text("Area of a Square", font_size=48, color=TEXT)
+        self.play(Write(title))
+        self.wait(1)
 
-        # Add side labels
-        a_label = MathTex("a = 3", color=RED).next_to(triangle, DOWN).shift(1.5 * RIGHT)
-        b_label = MathTex("b = 4", color=RED).next_to(triangle, LEFT).shift(2 * UP)
-        c_label = MathTex("c = ?", color=RED).next_to(triangle, RIGHT).shift(2 * UP)
+        # Create square
+        square = Square(side_length=2, color=PRIMARY, fill_opacity=0.5)
+        self.play(Create(square))
+        self.wait(1)
 
-        # Create the formula
-        formula = MathTex("a^2 + b^2 = c^2", color=BLUE).to_edge(UP)
+        # Label square's side length
+        side_length_label = MathTex("s = 2", color=TEXT).next_to(square, DOWN)
+        self.play(Write(side_length_label))
+        self.wait(1)
 
-        # Animate the substitution step
-        substitution = MathTex("3^2 + 4^2 = ?", color=BLUE).next_to(formula, DOWN, buff=0.5)
-
-        # Animate the calculation
-        calculation = MathTex("9 + 16 = 25", color=BLUE).next_to(substitution, DOWN, buff=0.5)
-
-        # Animate the equation
-        equation = MathTex("25 = c^2", color=BLUE).next_to(calculation, DOWN, buff=0.5)
-
-        # Animate the final result
-        result = MathTex("c = 5", color=BLUE).next_to(equation, DOWN, buff=0.5)
-
-        # Create the scene
-        self.play(Create(triangle), Write(a_label), Write(b_label), Write(c_label), Write(formula), run_time=2)
-        self.wait()
-        self.play(Write(substitution), run_time=1.5)
-        self.wait(0.5)
-        self.play(Write(calculation), run_time=1.5)
-        self.wait(0.5)
-        self.play(Write(equation), run_time=1.5)
-        self.wait(0.5)
-        self.play(Write(result), run_time=1.5)
-        self.wait(0.5)
-        self.play(Transform(c_label, MathTex("c = 5", color=RED).next_to(triangle, RIGHT).shift(2 * UP)), run_time=1)
+        # Calculate area
+        area_label = MathTex("A = s^2", color=TEXT).next_to(square, UP)
+        area_value = MathTex("A = 2^2 = 4", color=SECONDARY).next_to(area_label, DOWN)
+        self.play(Write(area_label))
+        self.wait(1)
+        self.play(Write(area_value))
         self.wait(2)
+
+        # Highlight area
+        area_highlight = SurroundingRectangle(area_value, color=SECONDARY, buff=0.1)
+        self.play(Create(area_highlight))
+        self.wait(2)
+
+        # Fade out
+        self.play(FadeOut(title, square, side_length_label, area_label, area_value, area_highlight))
+        self.wait(1)

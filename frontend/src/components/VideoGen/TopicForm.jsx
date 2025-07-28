@@ -1,18 +1,22 @@
 import { useState } from "react";
 
-const TopicForm = ({ onSubmit, loading }) => {
+const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
   const [prompt, setPrompt] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!prompt.trim()) return;
-    onSubmit(prompt);
+    onSubmitDescription(prompt);
+    onSubmitVideo(prompt);
     setPrompt("");
   };
 
   return (
-    <div className="flex items-start justify-center ">
-      <form onSubmit={handleSubmit} className="flex align-middle w-5xl mt-16">
+    <div className="flex items-start justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex align-middle z-10 w-1/2 mt-12"
+      >
         <input
           type="text"
           placeholder="Enter a topic like 'Pythagorean Theorem'"

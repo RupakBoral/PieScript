@@ -64,6 +64,16 @@ export const validateManimCode = (code) => {
   const errors = [];
   const warnings = [];
   
+  // Validate input
+  if (!code || typeof code !== 'string') {
+    errors.push('Invalid code input: expected a non-empty string');
+    return {
+      isValid: false,
+      errors,
+      warnings
+    };
+  }
+  
   // Check for forbidden patterns
   for (const pattern of FORBIDDEN_PATTERNS) {
     if (pattern.test(code)) {
@@ -94,7 +104,9 @@ export const validateManimCode = (code) => {
   
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    const trimmed = line.trim();
+    // Ensure line is a string before calling trim()
+    const lineStr = String(line || '');
+    const trimmed = lineStr.trim();
     
     if (trimmed.startsWith('class Main(Scene):')) {
       inClass = true;
@@ -106,7 +118,7 @@ export const validateManimCode = (code) => {
     
     // Check for proper indentation in construct method
     if (inMethod && trimmed.length > 0 && !trimmed.startsWith('#')) {
-      const spaces = line.length - line.ltrimStart().length;
+      const spaces = lineStr.length - lineStr.trimStart().length;
       if (spaces < indentLevel * 4 && !trimmed.startsWith('def') && !trimmed.startsWith('class')) {
         warnings.push(`Line ${i + 1}: Potential indentation issue`);
       }
@@ -121,6 +133,11 @@ export const validateManimCode = (code) => {
 };
 
 export const sanitizeManimCode = (code) => {
+  // Validate input
+  if (!code || typeof code !== 'string') {
+    return '';
+  }
+  
   // Remove any potentially dangerous imports or functions
   let sanitized = code;
   

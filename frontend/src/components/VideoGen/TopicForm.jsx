@@ -11,6 +11,17 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
     setPrompt("");
   };
 
+  // Note: The second button was changed to type="button" to prevent form submission
+  const handleVoiceAction = () => {
+    if (loading) return;
+    alert("Voice changing action triggered! 🎙️");
+  };
+
+  const handleDebugAction = () => {
+    if (loading) return;
+    alert("Debugging action triggered! 🐞");
+  };
+
   return (
     <div className="flex items-start justify-center">
       <form

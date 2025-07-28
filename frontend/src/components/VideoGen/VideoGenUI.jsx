@@ -1,11 +1,11 @@
 import { useState } from "react";
 import React from "react";
-import TopicForm from "./components/TopicForm";
-import Description from "./components/Description";
-import VideoPlayer from "./components/VideoPlayer";
-import starVideo from "./assets/star.mp4";
+import TopicForm from "./TopicForm";
+import Description from "./Description";
+import VideoPlayer from "./VideoPlayer";
+import starVideo from "../../assets/star.mp4";
 
-function App() {
+const VideoGenUI = () => {
   const [description, setDescription] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ function App() {
           Your browser does not support the video tag.
         </video>
         <div className="relative z-10">
-          <h1 className="text-white text-4xl font-semibold text-center my-10">
+          <h1 className="text-white text-4xl font-semibold text-center my-8">
             🎥 PieScript
           </h1>
           <TopicForm onSubmit={handleTopicSubmit} loading={loading} />
@@ -65,13 +65,8 @@ function App() {
           {!loading && videoUrl !== null && <VideoPlayer videoUrl={videoUrl} />}
         </div>
       </div>
-      <footer className="bg-gray-700 flex flex-col items-center  align-bottom h-14 justify-center">
-        <p className="text-white font-bold font-sans align-middle">
-          Made by OG Dev's Rupak Boral & Parshant Vardhan :!
-        </p>
-      </footer>
     </div>
   );
-}
+};
 
-export default App;
+export default VideoGenUI;

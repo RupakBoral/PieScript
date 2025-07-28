@@ -1,16 +1,21 @@
 import express from "express";
 import videoUpload from "../utils/videoUpload.js";
 import { groq_config } from "../utils/groq_config.js";
-
+import fileCreation from "../utils/fileCreation.js";
 const videoRouter = express.Router();
 
-videoRouter.post("/", (req, res) => {
+videoRouter.post("/", async (req, res) => {
   try {
     const { prompt } = req.body;
-    groq_config(prompt);
-    res.status(200).json({ data: req?.body?.prompt, message: "Ok tested" });
-    // const path = generateVideo(req.body);
-    // const secure_url = videoUpload(path);
+
+    const code = await groq_config(prompt);
+
+    await fileCreation(code);
+
+    const secure_url = await videoUpload();
+	// const secure_url = '';
+
+    res.status(200).json({ secure_url: secure_url, message: "Ok tested" });
   } catch (err) {
     console.log(err);
     res.status(400).json("Error: " + err);

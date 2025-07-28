@@ -3,3 +3,7 @@ dist/
 .env
 .DS_Store
 *.log
+media
+generation
+/index.js
+mfput.log

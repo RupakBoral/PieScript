@@ -1,3 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/ChatManim/backend/generation/media/videos/main/480p15/partial_movie_files/HelloMessage/1185818338_1774317191_223132457.mp4'
-file 'file:C:/ChatManim/backend/generation/media/videos/main/480p15/partial_movie_files/HelloMessage/624642324_2408024828_730433306.mp4'

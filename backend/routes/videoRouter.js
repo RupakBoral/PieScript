@@ -13,6 +13,7 @@ videoRouter.post("/", async (req, res) => {
     await fileCreation(code);
 
     const secure_url = await videoUpload();
+	// const secure_url = '';
 
     res.status(200).json({ secure_url: secure_url, message: "Ok tested" });
   } catch (err) {

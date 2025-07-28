@@ -4,7 +4,7 @@ import fs from "fs";
 
 const videoUpload = async () => {
   try {
-    const path = "C:/ChatManim/backend/media/videos/main/480p15/Main.mp4";
+    const path = "C:/PieScript/backend/media/videos/main/480p15/Main.mp4";
 
     if (!fs.existsSync(path)) {
       throw new Error("❌ Video file does not exist at: " + path);

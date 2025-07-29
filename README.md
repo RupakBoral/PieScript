@@ -14,6 +14,8 @@ PieScript is an intelligent code-generation pipeline that uses a language model 
 
     🔧 Easily extendable for various animation templates
 
+    🔊 Murf API Integration: Converts text prompts into human-like speech using Murf's voice synthesis. The audio is fetched via API and can be played or used directly in the frontend.
+
 📦 Tech Stack
 
     React + Tailwind CSS (frontend UI)

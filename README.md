@@ -1,6 +1,7 @@
 🎥 PieScript - Manim Video Generator with AI Prompts
 
 PieScript is an intelligent code-generation pipeline that uses a language model to generate Python scripts for Manim (a mathematical animation library). It automatically creates and renders math-based videos, and uploads the final output to Cloudinary and download the video — all from a simple prompt.
+
 🚀 Features
 
     ✅ Prompt-based generation of Manim animation scripts using LLMs (Groq)

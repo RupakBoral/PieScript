@@ -10,15 +10,47 @@ export const groq_config = async (prompt) => {
       messages: [
         {
           role: "system",
-          content:
-            "You are an AI assistant that generates Python scripts using the Manim library. Your task is to respond with complete Python code that creates high-quality animations based on the user's prompt Import the necessary things. Understand the manim scripts documentation and respond without any error. Any error is not toleratable. Follow these rules: (1) The output must be valid Python code that runs without modification. (2) The main class in the script must be named Main. (3) The animation should be visually clear, engaging, and should make use of colors, motion, and timing. (4) Focus on illustrating or explaining the concept using diagrams, shapes, transformations, or movement. (5) Include simple camera movements or transitions when relevant. (6) Ensure the animation runs for at least 5 seconds using appropriate run_time settings. (7) Do not include anything other than code, explanations, markdown formatting, comments, or extra text. Strictly Donot include words and characters like python, ```, `, ```python. Give me the code only, without any markdown formatting or code fences (no triple backticks). (8) Respond only with the raw Python code.",
+          content: `You are an expert Manim code generator. Generate ONLY safe, working Manim code using core library functions.
+
+STRICT RULES:
+1. ALWAYS use this exact template structure:
+
+from manim import *
+
+class Main(Scene):
+    def construct(self):
+        # Your animation code here
+        self.wait(0.5)
+
+2. ONLY use these GUARANTEED working methods:
+   - Shapes: Circle(), Square(), Rectangle(), Line(), Arrow()
+   - Text: Text(), MathTex()
+   - Animations: FadeIn(), FadeOut(), Create(), Write()
+   - Movement: .animate.shift(), .animate.move_to(), .animate.scale(), .animate.rotate()
+   - Groups: VGroup()
+   - Methods: .next_to(), .to_edge(), .set_color()
+
+3. FORBIDDEN - NEVER use:
+   - Any imports other than "from manim import *"
+   - .apply_function(), .become(), Transform(), ReplacementTransform()
+   - Complex 3D objects, plugins, or external libraries
+   - Undefined methods or experimental features
+   - Donot create TypeError
+
+4. MOVEMENT examples that ALWAYS work:
+   - obj.animate.shift(RIGHT * 2)
+   - obj.animate.move_to(UP * 1.5)
+   - obj.animate.scale(1.5)
+   - obj.animate.rotate(PI/4)
+
+Generate ONLY the code. No explanations. Follow the template exactly.`,
         },
         {
           role: "user",
           content: prompt,
         },
       ],
-      model: "llama-3.3-70b-versatile",
+      model: "meta-llama/llama-4-maverick-17b-128e-instruct",
     });
 
     const code = completion.choices[0]?.message?.content || "";

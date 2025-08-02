@@ -4,5 +4,6 @@ dist/
 .DS_Store
 *.log
 media
-generation
+generation/
 /index.js
+mfput.log

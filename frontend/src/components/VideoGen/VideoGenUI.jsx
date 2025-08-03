@@ -62,20 +62,36 @@ const VideoGenUI = () => {
   };
 
   return (
-    <div>
+    <div className="overflow-hidden min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <Header />
-      <TopicForm
-        onSubmitVideo={handleVideoGen}
-        onSubmitDescription={handleDescriptionGen}
-        loading={loading}
-      />
-      {loading && (
-        <div className="flex justify-center mt-4">
-          <div className="animate-spin h-8 w-8 border-t-2 border-b-2 border-purple-500 rounded-full"></div>
+      <div className="relative z-20 my-12 space-y-8 px-6">
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl font-bold text-white/90 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Video Generation
+          </h2>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            Create stunning videos from your ideas with AI-powered generation
+          </p>
         </div>
-      )}
-      {description !== null && <Description text={description || error} />}
-      {!loading && videoUrl !== null && <VideoPlayer videoUrl={videoUrl} />}
+        
+        <TopicForm
+          onSubmitVideo={handleVideoGen}
+          onSubmitDescription={handleDescriptionGen}
+          loading={loading}
+        />
+        
+        {loading && (
+          <div className="flex justify-center mt-8">
+            <div className="inline-flex items-center gap-3 text-white/70 text-lg">
+              <div className="animate-spin h-6 w-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full"></div>
+              <span className="animate-pulse">Generating your video...</span>
+            </div>
+          </div>
+        )}
+        
+        {description !== null && <Description text={description || error} />}
+        {!loading && videoUrl !== null && <VideoPlayer videoUrl={videoUrl} />}
+      </div>
     </div>
   );
 };

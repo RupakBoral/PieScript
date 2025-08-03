@@ -1,10 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 
 const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Video Generation", icon: "🎬" },
+    { path: "/text-video", label: "Video Generation", icon: "🎬" },
     { path: "/text-audio", label: "Text to Audio", icon: "🎵" },
     { path: "/translate", label: "Translation", icon: "🌐" },
     { path: "/dub", label: "Dubbing", icon: "🎭" },
@@ -30,4 +30,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation; 
+export default Navigation;

@@ -1,10 +1,10 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router";
 
 const Body = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Video Generation", icon: "🎬" },
+    { path: "/text-video", label: "Video Generation", icon: "🎬" },
     { path: "/text-audio", label: "Text to Audio", icon: "🎵" },
     { path: "/translate", label: "Translation", icon: "🌐" },
     { path: "/dub", label: "Dubbing", icon: "🎭" },
@@ -20,7 +20,7 @@ const Body = () => {
             <div className="flex items-center">
               <h1 className="text-white text-xl font-bold">PieScript</h1>
             </div>
-            
+
             {/* Navigation Links */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -40,18 +40,28 @@ const Body = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button className="text-white hover:text-white focus:outline-none focus:text-white">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               </button>
             </div>
           </div>
         </div>
-        
+
         {/* Mobile Navigation */}
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/30 backdrop-blur-xl">

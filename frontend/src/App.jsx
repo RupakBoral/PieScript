@@ -3,7 +3,7 @@ import VideoGenUI from "./components/VideoGen/VideoGenUI";
 import TextAudioUI from "./components/Pages/TextAudioUI";
 import Translation from "./components/Pages/Translation";
 import Dubbing from "./components/Pages/Dubbing";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router";
 import Body from "./Body";
 import Home from "./components/Home";
 

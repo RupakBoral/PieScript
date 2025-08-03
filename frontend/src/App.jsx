@@ -5,7 +5,6 @@ import Translation from "./components/Pages/Translation";
 import Dubbing from "./components/Pages/Dubbing";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Body from "./Body";
-import Home from "./components/Home";
 
 function App() {
   return (
@@ -13,8 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Body />}>
-            <Route index element={<Home />} />
-            <Route path="text-video" element={<VideoGenUI />} />
+            <Route index element={<VideoGenUI />} />
             <Route path="text-audio" element={<TextAudioUI />} />
             <Route path="translate" element={<Translation />} />
             <Route path="dub" element={<Dubbing />} />

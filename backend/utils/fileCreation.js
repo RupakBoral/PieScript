@@ -23,7 +23,9 @@ const fileCreation = async (code) => {
       const validation = validateManimCode(cleanCode);
       if (!validation.isValid) {
         console.error("❌ Code validation failed:", validation.errors);
-        return reject(new Error(`Invalid code generated: ${validation.errors.join(', ')}`));
+        return reject(
+          new Error(`Invalid code generated: ${validation.errors.join(", ")}`)
+        );
       }
 
       if (validation.warnings.length > 0) {
@@ -46,23 +48,71 @@ const fileCreation = async (code) => {
           console.error("❌ Manim execution failed:");
           console.error("Error message:", error.message);
           console.error("Stderr:", stderr);
-          
+
           // Provide more specific error messages
-          if (stderr.includes('AttributeError')) {
-            return reject(new Error("Code contains invalid Manim methods. Please try a different prompt."));
+          if (stderr.includes("AttributeError")) {
+            return reject(
+              new Error(
+                "Code contains invalid Manim methods. Please try a different prompt."
+              )
+            );
           }
-          if (stderr.includes('ImportError') || stderr.includes('ModuleNotFoundError')) {
-            return reject(new Error("Missing required dependencies. Please ensure Manim is properly installed."));
+          if (
+            stderr.includes("ImportError") ||
+            stderr.includes("ModuleNotFoundError")
+          ) {
+            return reject(
+              new Error(
+                "Missing required dependencies. Please ensure Manim is properly installed."
+              )
+            );
           }
-          if (stderr.includes('SyntaxError')) {
-            return reject(new Error("Generated code has syntax errors. Please try a different prompt."));
+          if (stderr.includes("SyntaxError")) {
+            return reject(
+              new Error(
+                "Generated code has syntax errors. Please try a different prompt."
+              )
+            );
           }
-          
+
           return reject(new Error(`Video generation failed: ${error.message}`));
         }
-        
+
         console.log("✅ Manim execution successful!");
-        console.log("Output:", stdout);
+        console.log("Manim stdout:", stdout);
+        
+        // Check if video file was created and log the actual path
+        const expectedVideoPath = "C:/PieScript/backend/media/videos/main/480p15/Main.mp4";
+        if (fs.existsSync(expectedVideoPath)) {
+          console.log("✅ Video file created successfully at:", expectedVideoPath);
+        } else {
+          console.warn("⚠️ Video file not found at expected path:", expectedVideoPath);
+          
+          // Try to find where the video was actually created
+          const mediaDir = "C:/PieScript/backend/media";
+          if (fs.existsSync(mediaDir)) {
+            console.log("🔍 Searching for video files in media directory...");
+            const findVideoFiles = (dir, depth = 0) => {
+              if (depth > 5) return; // Prevent infinite recursion
+              try {
+                const items = fs.readdirSync(dir);
+                items.forEach(item => {
+                  const fullPath = `${dir}/${item}`;
+                  const stats = fs.statSync(fullPath);
+                  if (stats.isFile() && item.endsWith('.mp4')) {
+                    console.log("🎥 Found video file:", fullPath);
+                  } else if (stats.isDirectory()) {
+                    findVideoFiles(fullPath, depth + 1);
+                  }
+                });
+              } catch (e) {
+                console.log("❌ Cannot read directory:", dir, e.message);
+              }
+            };
+            findVideoFiles(mediaDir);
+          }
+        }
+        
         resolve();
       });
     } catch (err) {

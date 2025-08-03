@@ -17,14 +17,8 @@ STRICT RULES:
 
 from manim import *
 
-PRIMARY = "#3498db"
-SECONDARY = "#f1c40f"
-TEXT = "#ffffff"
-BACKGROUND = "#2c3e50"
-
 class Main(Scene):
     def construct(self):
-        self.camera.background_color = BACKGROUND
         # Your animation code here
         self.wait(0.5)
 
@@ -41,18 +35,13 @@ class Main(Scene):
    - .apply_function(), .become(), Transform(), ReplacementTransform()
    - Complex 3D objects, plugins, or external libraries
    - Undefined methods or experimental features
+   - Donot create TypeError
 
 4. MOVEMENT examples that ALWAYS work:
    - obj.animate.shift(RIGHT * 2)
    - obj.animate.move_to(UP * 1.5)
    - obj.animate.scale(1.5)
    - obj.animate.rotate(PI/4)
-
-5. ANIMATION examples that ALWAYS work:
-   - self.play(FadeIn(object))
-   - self.play(Create(object))
-   - self.play(Write(text))
-   - self.play(FadeOut(object))
 
 Generate ONLY the code. No explanations. Follow the template exactly.`,
         },

@@ -2,11 +2,14 @@ from manim import *
 
 class Main(Scene):
     def construct(self):
-        axes = VGroup()
-        axes.add(Line((-PI, 0, 0), (PI, 0, 0)))
-        axes.add(Line((0, -1.5, 0), (0, 1.5, 0)))
-        self.add(axes)
+        axes = Axes(
+            x_range=[0, 4 * PI, PI / 2],
+            y_range=[-1.5, 1.5, 1],
+            color=WHITE,
+            axis_config={"include_tip": False}
+        )
 
-        sine_wave = FunctionGraph(lambda x: np.sin(x), x_range=[-PI, PI])
-        self.play(Create(sine_wave))
+        sine_wave = axes.plot(lambda x: np.sin(x), x_range=[0, 4 * PI], color=BLUE)
+
+        self.play(Create(axes), Create(sine_wave))
         self.wait(0.5)

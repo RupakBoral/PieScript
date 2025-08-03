@@ -3,7 +3,6 @@ import React from "react";
 import TopicForm from "./TopicForm";
 import Description from "./Description";
 import VideoPlayer from "./VideoPlayer";
-import Header from "../utils/Header";
 import { GoogleGenAI } from "@google/genai";
 
 const VideoGenUI = () => {
@@ -16,7 +15,7 @@ const VideoGenUI = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8888/video", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/video`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
@@ -62,25 +61,25 @@ const VideoGenUI = () => {
   };
 
   return (
-    <div className="overflow-hidden min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <Header />
+    <div className="overflow-hidden min-h-screen">
       <div className="relative z-20 my-12 space-y-8 px-6">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold text-white/90 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold bg-gradient-to-r to-purple-400 from-white text-transparent bg-clip-text">
             AI Video Generation
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Transform your ideas into stunning videos with our advanced AI-powered video generation
+            Transform your ideas into stunning videos with our advanced
+            AI-powered video generation
           </p>
         </div>
-        
+
         <div className="w-full max-w-4xl mx-auto">
           <TopicForm
             onSubmitVideo={handleVideoGen}
             onSubmitDescription={handleDescriptionGen}
             loading={loading}
           />
-          
+
           {loading && (
             <div className="flex justify-center mt-8">
               <div className="inline-flex items-center gap-3 text-white/70 text-lg">
@@ -89,13 +88,13 @@ const VideoGenUI = () => {
               </div>
             </div>
           )}
-          
+
           {description !== null && (
             <div className="mt-8">
               <Description text={description || error} />
             </div>
           )}
-          
+
           {!loading && videoUrl !== null && (
             <div className="mt-8">
               <VideoPlayer videoUrl={videoUrl} />

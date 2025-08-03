@@ -11,17 +11,6 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
     setPrompt("");
   };
 
-  // Note: The second button was changed to type="button" to prevent form submission
-  const handleVoiceAction = () => {
-    if (loading) return;
-    alert("Voice changing action triggered! 🎙️");
-  };
-
-  const handleDebugAction = () => {
-    if (loading) return;
-    alert("Debugging action triggered! 🐞");
-  };
-
   return (
     <div className="flex items-start justify-center w-full">
       <form
@@ -40,26 +29,36 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
           />
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         </div>
-        
+
         <button
           type="submit"
-          className="relative px-8 py-6 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-2xl shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg min-w-[140px] group overflow-hidden"
+          className="cursor-pointer hover:text-black relative px-8 py-6 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-2xl shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg min-w-[140px] group overflow-hidden"
           disabled={loading}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="relative flex items-center justify-center gap-3">
             {loading ? (
-              <>
+              <div>
                 <div className="animate-spin h-6 w-6 border-2 border-white/30 border-t-white rounded-full"></div>
                 <span className="animate-pulse">Generating...</span>
-              </>
+              </div>
             ) : (
-              <>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <div className="flex items-center">
+                <p>Generate</p>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
-                Generate
-              </>
+              </div>
             )}
           </div>
         </button>

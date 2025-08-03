@@ -1,14 +1,24 @@
-import cloudinary from "./cloudinary_config";
-
-const audioUpload = async () => {
+const audioUpload = async (audioFile) => {
   try {
-    const result = await cloudinary.uploader.upload(videoPath, {
-      resource_type: "video",
-      public_id: "Main",
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.v2.uploader.upload_stream(
+        {
+          resource_type: "video",
+        },
+        (err, result) => {
+          if (err) return reject(err);
+          resolve(result);
+        }
+      );
+
+      streamifier.createReadStream(req.file.buffer).pipe(stream);
     });
 
     return result?.secure_url;
-  } catch (error) {}
+  } catch (error) {
+    console.error("Cloudinary Error:", error);
+    throw new Error("Failed to upload audio file");
+  }
 };
 
 export default audioUpload;

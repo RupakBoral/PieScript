@@ -22,7 +22,6 @@ const useMurfAPI = () => {
         data: data,
       };
       const response = await axios(config);
-      console.log(response?.data);
       return response?.data?.audioFile;
     } catch (error) {
       console.log(error);

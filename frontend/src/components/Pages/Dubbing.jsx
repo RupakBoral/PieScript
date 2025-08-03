@@ -94,6 +94,7 @@ const Dubbing = () => {
                     File uploaded: {file.name} ({(file.size / 1024).toFixed(1)}{" "}
                     KB)
                   </p>
+                  <p className="hidden">{audioUrl}</p>
                 </div>
               )}
 

@@ -1,36 +1,36 @@
 import React from "react";
 import Header from "../utils/Header";
-// import { useState } from "react";
+import { useState } from "react";
 
 const Dubbing = () => {
-  // const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
-  // const handleFile = async (event) => {
-  //   try {
-  //     if (event.target.files[0].type == "audio/*") {
-  //       event.target.value = "";
-  //       throw new Error("Please upload an audio file");
-  //     }
-  //     const audioFile = event?.target?.files[0];
-  //     const formData = new FormData();
-  //     formData.append("audio", audioFile);
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_BACKEND_URL}/upload-audio`,
-  //       {
-  //         method: "POST",
-  //         body: formData,
-  //       }
-  //     );
+  const handleFile = async (event) => {
+    try {
+      if (event.target.files[0].type == "audio/*") {
+        event.target.value = "";
+        throw new Error("Please upload an audio file");
+      }
+      const audioFile = event?.target?.files[0];
+      const formData = new FormData();
+      formData.append("audio", audioFile);
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/upload-audio`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-  //     const data = await response.json();
-  //     console.log("Uploaded audio URL:", data.audioUrl);
-  //   } catch (err) {
-  //     setError(err?.message);
-  //     setTimeout(() => {
-  //       setError("");
-  //     }, 3000);
-  //   }
-  // };
+      const data = await response.json();
+      console.log("Uploaded audio URL:", data.audioUrl);
+    } catch (err) {
+      setError(err?.message);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
+  };
   return (
     <div className="overflow-hidden min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <Header />

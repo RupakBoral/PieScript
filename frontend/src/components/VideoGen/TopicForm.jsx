@@ -23,9 +23,12 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="relative group">
+    <div className="flex items-start justify-center w-full">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center gap-4 w-full max-w-4xl px-6"
+      >
+        <div className="relative flex-1 group">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
           <input
             type="text"
@@ -38,30 +41,28 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         </div>
         
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="relative px-8 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-2xl shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg min-w-[160px] group overflow-hidden"
-            disabled={loading}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative flex items-center justify-center gap-3">
-              {loading ? (
-                <>
-                  <div className="animate-spin h-5 w-5 border-2 border-white/30 border-t-white rounded-full"></div>
-                  <span className="animate-pulse">Generating...</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Generate Video
-                </>
-              )}
-            </div>
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="relative px-8 py-6 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-2xl shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg min-w-[140px] group overflow-hidden"
+          disabled={loading}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="relative flex items-center justify-center gap-3">
+            {loading ? (
+              <>
+                <div className="animate-spin h-6 w-6 border-2 border-white/30 border-t-white rounded-full"></div>
+                <span className="animate-pulse">Generating...</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Generate
+              </>
+            )}
+          </div>
+        </button>
       </form>
     </div>
   );

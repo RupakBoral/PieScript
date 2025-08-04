@@ -18,7 +18,11 @@ const Dubbing = () => {
         `${import.meta.env.VITE_BACKEND_URL}/audio/murf/job`,
         { fileUrl: url }
       );
-      setDownloadUrl(response?.data?.DownloadUrl);
+      setDownloadUrl(response?.data?.download_audio_url);
+      setError(response?.data?.message);
+      setTimeout(() => {
+        setError("");
+      }, 2000);
     } catch (error) {
       setError(error?.message || "Dub generation failed");
     } finally {
@@ -32,7 +36,6 @@ const Dubbing = () => {
     }
     const file = event.target.files[0];
     setFile(file);
-    console.log(file);
   };
 
   const handleCloudUpload = async () => {
@@ -74,10 +77,10 @@ const Dubbing = () => {
       <div className="relative z-20 my-12 space-y-8 px-6">
         <div className="text-center space-y-4">
           <h2 className="text-4xl font-bold bg-gradient-to-r to-purple-400 from-white bg-clip-text text-transparent">
-            Video Dubbing
+            Voice Dubbing
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Transform your videos with AI-powered dubbing in multiple languages
+            Transform your audio with AI-powered dubbing in multiple languages
           </p>
         </div>
 

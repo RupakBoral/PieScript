@@ -9,7 +9,7 @@ import Home from "./components/Home";
 
 function App() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Body />}>

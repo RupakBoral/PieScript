@@ -3,6 +3,7 @@ import multer from "multer";
 import streamifier from "streamifier";
 import cloudinary from "../utils/cloudinary_config.js";
 import axios from "axios";
+import checkJobStatus from "../utils/dub/checkJobStatus.js";
 
 const audioRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -43,37 +44,38 @@ audioRouter.post("/", upload.single("audio"), async (req, res) => {
 
 audioRouter.post("/murf/job", async (req, res) => {
   const { fileUrl } = req.body;
-  console.log(fileUrl);
 
   if (!fileUrl) {
     return res.status(400).json({ message: "Missing fileUrl" });
   }
 
   try {
+    const formData = new FormData();
+    formData.append("file_url", fileUrl);
+    formData.append("target_locales", "ko_KR");
     const response = await axios.post(
       "https://api.murf.ai/v1/murfdub/jobs/create",
-      {
-        file_url: fileUrl,
-        file_name: fileUrl.split("/").pop().split("?")[0],
-        priority: "LOW",
-        source_locale: "en_US",
-        target_locales: ["hi_IN"],
-      },
+      formData,
       {
         headers: {
-          "Content-Type": "application/json",
-          "api-key": process.env.MURF_API_KEY,
+          "Content-Type": "multipart/form-data",
+          "api-key": process.env.MURF_DUB_API_KEY,
         },
       }
     );
 
-    console.log("Murf response:", response.data);
+    const job_id = response.data?.job_id;
 
-    if (!response.data?.job_id) {
-      return res.status(500).json({ message: "Murf job creation failed" });
+    if (job_id !== null) {
+      const download_audio_url = await checkJobStatus(job_id);
+
+      res.status(200).json({
+        message: "Audio generated successfully",
+        download_audio_url: download_audio_url,
+      });
+    } else {
+      res.status(204).json({ message: "Failed to dub the audio" });
     }
-
-    res.status(200).json({ jobId: response.data.job_id });
   } catch (error) {
     console.error("Murf API error:", error.response?.data || error.message);
     res.status(500).json({ message: "Murf request failed" });

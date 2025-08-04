@@ -7,6 +7,7 @@ const TextAudioUI = () => {
 
   const [audioUrl, setAudioUrl] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,14 +20,16 @@ const TextAudioUI = () => {
         alert("Please enter some text to convert to audio");
         return;
       }
-      console.log("API call started with prompt:", prompt);
       setLoading(true);
       const response = await callMurf({ prompt });
       setAudioUrl(response);
     } catch (error) {
-      console.log("API error:", error);
+      setError("API error: " + error);
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
     }
   };
 
@@ -94,6 +97,8 @@ const TextAudioUI = () => {
             </button>
           </div>
         </form>
+
+        {error && <p>{error}</p>}
 
         <div className="w-full max-w-4xl mx-auto">
           {!loading ? (

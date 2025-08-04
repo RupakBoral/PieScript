@@ -4,7 +4,7 @@ import BackgroundVideo from "./components/utils/BackgroundVideo";
 
 const Body = () => {
   return (
-    <div className="min-h-screen min-w-screen flex flex-col bg-gradient-to-br from-gray-900 to-blue-900 relative overflow-hidden">
+    <div className="min-h-screen min-w-screen flex flex-col bg-gradient-to-br from-purple-950 via-slate-950 to-purple-950 relative overflow-hidden">
       <Navigation />
       <div className="flex-grow relative z-10">
         <BackgroundVideo />

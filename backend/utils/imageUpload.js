@@ -6,7 +6,6 @@ const imageUpload = async (path) => {
     const result = await cloudinary.uploader.upload(path, {
       public_id: "sinewave",
     });
-    console.log(result);
     // delete the file from the local
     await deleteMyFile(path);
   } catch (err) {

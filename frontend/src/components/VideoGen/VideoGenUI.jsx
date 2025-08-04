@@ -53,9 +53,9 @@ const VideoGenUI = () => {
       });
       setDescription(response?.text);
     } catch (err) {
+      setError(err);
       setTimeout(() => {
-        console.log(err);
-        setError(err);
+        setError("");
       }, 3000);
     }
   };
@@ -88,13 +88,11 @@ const VideoGenUI = () => {
               </div>
             </div>
           )}
-
           {description !== null && (
             <div className="mt-8">
               <Description text={description || error} />
             </div>
           )}
-
           {!loading && videoUrl !== null && (
             <div className="mt-8">
               <VideoPlayer videoUrl={videoUrl} />

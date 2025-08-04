@@ -7,25 +7,27 @@ const videoRouter = express.Router();
 videoRouter.post("/", async (req, res) => {
   try {
     const { prompt } = req.body;
-    console.log("🎥 Starting video generation for prompt:", prompt);
 
     console.log("🤖 Generating code with Groq...");
     const code = await groq_config(prompt);
-    console.log("✅ Code generation completed");
 
     console.log("📝 Creating and rendering video file...");
     await fileCreation(code);
-    console.log("✅ Video file creation completed");
 
     console.log("☁️ Starting Cloudinary upload...");
     const secure_url = await videoUpload();
-    
+
     if (!secure_url) {
       throw new Error("Upload completed but no URL returned");
     }
-    
+
     console.log("✅ Complete pipeline finished successfully!");
-    res.status(200).json({ secure_url: secure_url, message: "Video generated and uploaded successfully" });
+    res
+      .status(200)
+      .json({
+        secure_url: secure_url,
+        message: "Video generated and uploaded successfully",
+      });
   } catch (err) {
     console.error("❌ Error in video generation pipeline:", err.message);
     console.error("Full error stack:", err.stack);

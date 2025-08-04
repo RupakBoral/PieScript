@@ -2,8 +2,8 @@ import starVideo from "../../assets/star.mp4";
 
 const BackgroundVideo = () => {
   return (
-    <div className="absolute h-screen w-screen">
-      <div className="absolute opacity-70 w-full h-full bg-gradient-to-br from-purple-950 via-slate-950 to-purple-950"></div>
+    <div className="absolute h-screen w-screen object-cover overflow-x-hidden">
+      <div className="absolute opacity-10 w-full h-full bg-gradient-to-b from-slatee-900 to-slate-950 "></div>
       <video
         autoPlay
         loop

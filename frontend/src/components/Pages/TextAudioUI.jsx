@@ -37,10 +37,10 @@ const TextAudioUI = () => {
     <div className="overflow-hidden min-h-screen">
       <div className="relative z-20 my-12 space-y-8 px-6">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold text-transparent bg-gradient-to-r to-purple-400 from-white bg-clip-text ">
+          <h2 className="text-4xl font-semibold text-transparent bg-gradient-to-r to-purple-400 from-white bg-clip-text ">
             Text to Audio
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 font-thin text-xl max-w-2xl mx-auto">
             Transform your text into high-quality audio with our advanced
             AI-powered voice synthesis
           </p>
@@ -55,7 +55,7 @@ const TextAudioUI = () => {
             <textarea
               name="prompt"
               rows="4"
-              className="relative w-full p-6 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 shadow-2xl transition-all duration-300 text-lg font-medium resize-none"
+              className="relative w-full p-6 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 shadow-2xl transition-all duration-500 text-lg resize-none"
               placeholder="Enter your text here to convert to audio... (e.g., 'Hello world, this is a sample text for audio conversion')"
               disabled={loading}
             />

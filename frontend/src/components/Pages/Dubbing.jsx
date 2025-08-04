@@ -76,10 +76,10 @@ const Dubbing = () => {
     <div className="overflow-hidden min-h-screen">
       <div className="relative z-20 my-12 space-y-8 px-6">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r to-purple-400 from-white bg-clip-text text-transparent">
+          <h2 className="text-4xl font-semibold bg-gradient-to-r to-purple-400 from-white bg-clip-text text-transparent">
             Voice Dubbing
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 font-thin text-xl max-w-2xl mx-auto">
             Transform your audio with AI-powered dubbing in multiple languages
           </p>
         </div>

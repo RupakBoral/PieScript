@@ -64,10 +64,10 @@ const VideoGenUI = () => {
     <div className="overflow-hidden min-h-screen">
       <div className="relative z-20 my-12 space-y-8 px-6">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl font-bold bg-gradient-to-r to-purple-400 from-white text-transparent bg-clip-text">
+          <h2 className="text-4xl font-semibold bg-gradient-to-r to-purple-400 from-white text-transparent bg-clip-text">
             AI Video Generation
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 font-thin text-xl font-sans max-w-2xl mx-auto">
             Transform your ideas into stunning videos with our advanced
             AI-powered video generation
           </p>

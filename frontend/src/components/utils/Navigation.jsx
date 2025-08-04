@@ -15,8 +15,8 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link to={"/"} className="text-white text-xl font-bold">
-              PieScript
+            <Link to={"/"} className="shadow-2xl">
+              <img className="object-cover w-36 h-16" src="/favicon.png" />
             </Link>
           </div>
 

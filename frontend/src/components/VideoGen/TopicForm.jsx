@@ -24,7 +24,7 @@ const TopicForm = ({ onSubmitVideo, onSubmitDescription, loading }) => {
             placeholder="Enter a topic like 'Pythagorean Theorem' or 'Quantum Physics'..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="relative w-full p-6 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 shadow-2xl transition-all duration-300 text-lg font-medium"
+            className="relative w-full p-6 rounded-2xl border border-white/20 bg-black/40 backdrop-blur-xl text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 shadow-2xl transition-all duration-500 text-lg"
             disabled={loading}
           />
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>

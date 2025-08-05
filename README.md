@@ -36,6 +36,10 @@ PieScript is an intelligent pipeline that transforms natural language prompts in
 
    <img width="1546" height="876" alt="image" src="https://github.com/user-attachments/assets/dce46f05-55da-45f8-a101-e82189d83c77" />
 
+4. Translate audio to various languages 🎶
+
+   <img width="1509" height="791" alt="image" src="https://github.com/user-attachments/assets/fa945070-19fc-4447-843d-80624bc9bcff" />
+
 
 🧰 Tech Stack
 🖥️ Frontend

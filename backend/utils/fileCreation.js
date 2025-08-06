@@ -12,14 +12,12 @@ const fileCreation = async (code) => {
         fs.mkdirSync(dir, { recursive: true });
       }
 
-      // Clean and validate the generated code
       let cleanCode = code
         .replace(/```python\s*/g, "")
         .replace(/```/g, "")
         .replace(/`/g, "")
         .trim();
 
-      // Validate the code for safety and compatibility
       const validation = validateManimCode(cleanCode);
       if (!validation.isValid) {
         console.error("❌ Code validation failed:", validation.errors);
@@ -32,14 +30,12 @@ const fileCreation = async (code) => {
         console.warn("⚠️ Code warnings:", validation.warnings);
       }
 
-      // Sanitize the code to ensure safety
       cleanCode = sanitizeManimCode(cleanCode);
       console.log("✅ Code validated and sanitized");
 
       fs.writeFileSync(path, cleanCode);
       console.log("✅ Generated code written to:", path);
 
-      // Use more robust manim command with error handling
       const manimCommand = `manim -pql "${path}" Main`;
       console.log("🎬 Running manim command:", manimCommand);
 
@@ -49,7 +45,6 @@ const fileCreation = async (code) => {
           console.error("Error message:", error.message);
           console.error("Stderr:", stderr);
 
-          // Provide more specific error messages
           if (stderr.includes("AttributeError")) {
             return reject(
               new Error(
@@ -80,26 +75,31 @@ const fileCreation = async (code) => {
 
         console.log("✅ Manim execution successful!");
         console.log("Manim stdout:", stdout);
-        
-        // Check if video file was created and log the actual path
-        const expectedVideoPath = "C:/PieScript/backend/media/videos/main/480p15/Main.mp4";
+
+        const expectedVideoPath =
+          "C:/PieScript/backend/media/videos/main/480p15/Main.mp4";
         if (fs.existsSync(expectedVideoPath)) {
-          console.log("✅ Video file created successfully at:", expectedVideoPath);
+          console.log(
+            "✅ Video file created successfully at:",
+            expectedVideoPath
+          );
         } else {
-          console.warn("⚠️ Video file not found at expected path:", expectedVideoPath);
-          
-          // Try to find where the video was actually created
+          console.warn(
+            "⚠️ Video file not found at expected path:",
+            expectedVideoPath
+          );
+
           const mediaDir = "C:/PieScript/backend/media";
           if (fs.existsSync(mediaDir)) {
             console.log("🔍 Searching for video files in media directory...");
             const findVideoFiles = (dir, depth = 0) => {
-              if (depth > 5) return; // Prevent infinite recursion
+              if (depth > 5) return;
               try {
                 const items = fs.readdirSync(dir);
-                items.forEach(item => {
+                items.forEach((item) => {
                   const fullPath = `${dir}/${item}`;
                   const stats = fs.statSync(fullPath);
-                  if (stats.isFile() && item.endsWith('.mp4')) {
+                  if (stats.isFile() && item.endsWith(".mp4")) {
                     console.log("🎥 Found video file:", fullPath);
                   } else if (stats.isDirectory()) {
                     findVideoFiles(fullPath, depth + 1);
@@ -112,7 +112,7 @@ const fileCreation = async (code) => {
             findVideoFiles(mediaDir);
           }
         }
-        
+
         resolve();
       });
     } catch (err) {

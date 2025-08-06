@@ -3,7 +3,7 @@ import multer from "multer";
 import streamifier from "streamifier";
 import cloudinary from "../utils/cloudinary_config.js";
 import axios from "axios";
-import checkJobStatus from "../utils/dub/checkJobStatus.js";
+import checkJobStatus from "../utils/checkJobStatus.js";
 
 const audioRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });

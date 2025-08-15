@@ -5,7 +5,9 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API });
 const gemini_config = async (prompt) => {
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    content: prompt,
+    content:
+      prompt +
+      ". Avoid using * in the response, keep it consice and explanatory.",
     config: {
       responseMimeType: "application/json",
       responseSchema: {

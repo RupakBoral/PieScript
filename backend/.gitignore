@@ -4,6 +4,8 @@ dist/
 .DS_Store
 *.log
 media
-generation/
+generation/__pycache__
+generation/media
+generation/main.py
 /index.js
 mfput.log

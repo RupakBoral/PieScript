@@ -4,6 +4,7 @@ import TopicForm from "./TopicForm";
 import Description from "./Description";
 import VideoPlayer from "./VideoPlayer";
 import { GoogleGenAI } from "@google/genai";
+import { backendUrl } from "@/lib/utils";
 
 const VideoGenUI = () => {
   const [description, setDescription] = useState(null);
@@ -15,7 +16,7 @@ const VideoGenUI = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/video`, {
+      const res = await fetch(`${backendUrl}/video`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),

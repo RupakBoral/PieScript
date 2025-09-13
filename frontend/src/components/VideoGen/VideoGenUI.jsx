@@ -4,7 +4,7 @@ import TopicForm from "./TopicForm";
 import Description from "./Description";
 import VideoPlayer from "./VideoPlayer";
 import { GoogleGenAI } from "@google/genai";
-import { backendUrl } from "@/lib/utils";
+import { backendUrl } from "./../../lib/utils";
 
 const VideoGenUI = () => {
   const [description, setDescription] = useState(null);
@@ -40,7 +40,7 @@ const VideoGenUI = () => {
 
   const handleDescriptionGen = async (prompt) => {
     try {
-      setDescription("");
+      setDescription("Loading...");
       const ai = new GoogleGenAI({
         apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
       });
@@ -94,10 +94,15 @@ const VideoGenUI = () => {
               <Description text={description || error} />
             </div>
           )}
-          {!loading && videoUrl !== null && (
+          {!loading &&
+          videoUrl !== null &&
+          videoUrl.length !== 0 &&
+          videoUrl !== undefined ? (
             <div className="mt-8">
               <VideoPlayer videoUrl={videoUrl} />
             </div>
+          ) : (
+            <p className="hidden"></p>
           )}
         </div>
       </div>

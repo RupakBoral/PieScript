@@ -2,15 +2,28 @@ from manim import *
 
 class Main(Scene):
     def construct(self):
-        # Create the triangle
-        triangle = Polygon([-2.5, -1.5, 0], [0, 1.5, 0], [2.5, -1.5, 0])
-        
-        # Label the sides
-        side1 = MathTex("5").next_to(Line([-2.5, -1.5, 0], [0, 1.5, 0]), LEFT)
-        side2 = MathTex("5").next_to(Line([0, 1.5, 0], [2.5, -1.5, 0]), RIGHT)
-        side3 = MathTex("3").next_to(Line([-2.5, -1.5, 0], [2.5, -1.5, 0]), DOWN)
-        
-        # Create the objects
+        # Display Title
+        title = Text("Pythagorean Theorem", font_size=48, weight=BOLD).to_edge(UP)
+        self.play(Write(title))
+        self.wait(1)
+
+        # Draw Triangle
+        triangle = VGroup(
+            Line(LEFT, RIGHT, color=WHITE),
+            Line(LEFT, LEFT + UP * np.sqrt(3), color=WHITE),
+            Line(RIGHT, LEFT + UP * np.sqrt(3), color=WHITE)
+        ).scale(2).move_to(ORIGIN)
         self.play(Create(triangle))
-        self.play(Write(VGroup(side1, side2, side3)))
-        self.wait(0.5)
+
+        # Label Sides
+        a_label = MathTex("a").next_to(triangle[0], DOWN)
+        b_label = MathTex("b").next_to(triangle[1], LEFT)
+        c_label = MathTex("c").next_to(triangle[2], RIGHT + UP/2)
+        self.play(Write(a_label), Write(b_label), Write(c_label))
+
+        # Show Formula
+        formula = MathTex("a^2 + b^2 = c^2").next_to(triangle, DOWN * 2)
+        self.play(Write(formula))
+
+        # Hold Scene
+        self.wait(3)

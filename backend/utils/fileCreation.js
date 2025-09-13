@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import fs from "fs";
-import { validateManimCode, sanitizeManimCode } from "./codeValidator.js";
+import { validateManimCode } from "./codeValidator.js";
 
 const fileCreation = async (code) => {
   return new Promise((resolve, reject) => {
@@ -19,32 +19,19 @@ const fileCreation = async (code) => {
         .trim();
 
       const validation = validateManimCode(cleanCode);
+
       if (!validation.isValid) {
-        console.error("❌ Code validation failed:", validation.errors);
         return reject(
           new Error(`Invalid code generated: ${validation.errors.join(", ")}`)
         );
       }
 
-      if (validation.warnings.length > 0) {
-        console.warn("⚠️ Code warnings:", validation.warnings);
-      }
-
-      cleanCode = sanitizeManimCode(cleanCode);
-      console.log("✅ Code validated and sanitized");
-
       fs.writeFileSync(path, cleanCode);
-      console.log("✅ Generated code written to:", path);
 
       const manimCommand = `manim -pql "${path}" Main`;
-      console.log("🎬 Running manim command:", manimCommand);
 
       exec(manimCommand, { timeout: 120000 }, (error, stdout, stderr) => {
         if (error) {
-          console.error("❌ Manim execution failed:");
-          console.error("Error message:", error.message);
-          console.error("Stderr:", stderr);
-
           if (stderr.includes("AttributeError")) {
             return reject(
               new Error(
@@ -73,50 +60,19 @@ const fileCreation = async (code) => {
           return reject(new Error(`Video generation failed: ${error.message}`));
         }
 
-        console.log("✅ Manim execution successful!");
-        console.log("Manim stdout:", stdout);
-
         const expectedVideoPath =
           "C:/PieScript/backend/media/videos/main/480p15/Main.mp4";
-        if (fs.existsSync(expectedVideoPath)) {
-          console.log(
-            "✅ Video file created successfully at:",
-            expectedVideoPath
+        if (!fs.existsSync(expectedVideoPath)) {
+          return reject(
+            new Error(
+              "Video file not found at expected path after Manim execution."
+            )
           );
-        } else {
-          console.warn(
-            "⚠️ Video file not found at expected path:",
-            expectedVideoPath
-          );
-
-          const mediaDir = "C:/PieScript/backend/media";
-          if (fs.existsSync(mediaDir)) {
-            console.log("🔍 Searching for video files in media directory...");
-            const findVideoFiles = (dir, depth = 0) => {
-              if (depth > 5) return;
-              try {
-                const items = fs.readdirSync(dir);
-                items.forEach((item) => {
-                  const fullPath = `${dir}/${item}`;
-                  const stats = fs.statSync(fullPath);
-                  if (stats.isFile() && item.endsWith(".mp4")) {
-                    console.log("🎥 Found video file:", fullPath);
-                  } else if (stats.isDirectory()) {
-                    findVideoFiles(fullPath, depth + 1);
-                  }
-                });
-              } catch (e) {
-                console.log("❌ Cannot read directory:", dir, e.message);
-              }
-            };
-            findVideoFiles(mediaDir);
-          }
         }
 
         resolve();
       });
     } catch (err) {
-      console.error("❌ Unexpected error in fileCreation:", err);
       reject(err);
     }
   });

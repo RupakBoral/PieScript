@@ -9,7 +9,9 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 5555;
 
-app.use(cors({ origin: "https://piescript.onrender.com" }));
+app.use(
+  cors({ origin: ["https://piescript.onrender.com", "http://localhost:5173"] })
+);
 app.use(express.json());
 
 app.use("/video", videoRouter);

@@ -22,12 +22,10 @@ videoRouter.post("/", async (req, res) => {
     }
 
     console.log("✅ Complete pipeline finished successfully!");
-    res
-      .status(200)
-      .json({
-        secure_url: secure_url,
-        message: "Video generated and uploaded successfully",
-      });
+    res.status(200).json({
+      secure_url: secure_url,
+      message: "Video generated and uploaded successfully",
+    });
   } catch (err) {
     console.error("❌ Error in video generation pipeline:", err.message);
     console.error("Full error stack:", err.stack);

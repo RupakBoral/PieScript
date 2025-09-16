@@ -50,7 +50,7 @@ const Dubbing = () => {
       formData.append("audio", file);
 
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/audio`,
+        `${import.meta.env.VITE_BACKEND_PROD_URL}/audio`,
         formData
       );
 
